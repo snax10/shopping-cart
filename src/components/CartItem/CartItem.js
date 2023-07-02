@@ -10,12 +10,15 @@ export function CartItem({ product }) {
   const { thumbnail, title, price, id } = product;
 
   // const { setCartItems, cartItems } = useProducts();
-  const { cartItems, setCartItems } = useProductStore((state) => state);
+  const { cartItems, setCartItems, setIsCartActive } = useProductStore((state) => state);
 
   const handleRemoveItem = () => {
     const newCartItems = cartItems.filter(item => item.id !== id);
-
     setCartItems(newCartItems);
+
+    if(newCartItems.length === 0) {
+      setIsCartActive(false);
+    }
   };
 
   return (
